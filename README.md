@@ -43,5 +43,8 @@ For questions or collaborations, reach out via:
 - [LinkedIn](https://www.linkedin.com/in/jacob-mwambwa-8b7296362/)
 
 ---
+## Live
+- visit: [Live Portfolio](https://jacobwittyp.netlify.app/)
+---
 
 © 2025 Jacob Witty. All Rights
