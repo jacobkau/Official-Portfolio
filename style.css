@@ -31,7 +31,7 @@ body.dark-theme {
 .dark-theme .navbar-toggler-icon{
   color: #64ffda;  
 }
-header {
+.navbar {
   background: linear-gradient(135deg, #e0f2fe, #f0f8ff);
   padding: 20px;
   color: #1a1a2e;
