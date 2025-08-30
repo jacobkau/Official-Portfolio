@@ -761,7 +761,9 @@ footer {
     border-color: #64ffda;
   }
 }
-
+@media screen and (max-width: 1024px) {
+  margin-top: 2vh;
+}
 /* Responsive Design */
 @media screen and (max-width: 768px) {
    
