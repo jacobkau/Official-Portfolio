@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jacob Mwambwa Kau - Portfolio</title>
+    <link rel="shortcut icon" href="https://res.cloudinary.com/ozrcvfms/image/upload/v1793799510/blogsystem/avatars/esdrktqda3nrui6k5hr0.jpg" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Monospace) -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Global Styles */
+        :root {
+            --bg-color: #fafafa;
+            --text-color: #1a1a1a;
+            --border-color: #000000;
+            --accent-color: #0066cc;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4, h5, h6 { font-weight: 700; }
+        a { color: var(--text-color); text-decoration: none; cursor: pointer; }
+
+        /* Hero Grid Background */
+        .hero-wrapper {
+            background-color: var(--bg-color);
+            background-image: 
+                linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            padding: 60px 0 80px 0;
+        }
+
+        /* Neo-Brutalist Components */
+        .brutal-card {
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 4px 4px 0px 0px var(--border-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .brutal-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px 0px var(--border-color);
+        }
+
+        .brutal-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-weight: 600;
+            box-shadow: 3px 3px 0px 0px var(--border-color);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .brutal-btn:hover {
+            background-color: #f0f0f0;
+            transform: translate(-1px, -1px);
+            box-shadow: 4px 4px 0px 0px var(--border-color);
+        }
+        .brutal-btn-dark {
+            background-color: var(--text-color);
+            color: var(--card-bg);
+        }
+        .brutal-btn-dark:hover { background-color: #333; }
+
+        .brutal-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin: 4px;
+            background: #fff;
+        }
+
+        /* Navigation Bar */
+        .nav-section {
+            background-color: #1a1a1a;
+            padding: 15px 0;
+            border-top: 2px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        /* When fixed to top */
+        .nav-section.is-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            border-top: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .nav-section .nav-link {
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 5px;
+            padding: 8px 16px;
+            margin: 0 5px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .nav-section .nav-link:hover, 
+        .nav-section .nav-link.active {
+            border-color: #ffd700;
+            background-color: #ffd700;
+            color: #000;
+        }
+
+        /* Mobile Nav Fix */
+        .nav-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            padding-bottom: 0;
+        }
+
+        /* Profile Image Animation */
+        .profile-img-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 0 auto;
+            animation: levitate 6s ease-in-out infinite;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--accent-color);
+            background-color: #d8b4b8;
+            box-shadow: 0 0 0 8px #fff, 0 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        /* Floating Text */
+        .floating-text {
+            position: absolute;
+            font-size: 0.8rem;
+            color: #555;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: floatText 4s ease-in-out infinite alternate;
+            z-index: 10;
+        }
+
+        /* Keyframes */
+        @keyframes levitate {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0); }
+        }
+        @keyframes floatText {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-10px); }
+        }
+
+        /* Timeline */
+        .timeline { border-left: 2px solid #e5e5e5; padding-left: 20px; position: relative; }
+        .timeline-item { position: relative; margin-bottom: 30px; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -27px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 1px var(--accent-color);
+        }
+
+        /* SPA Tabs */
+        .tab-content-section {
+            display: none;
+            padding: 60px 0;
+            flex-grow: 1;
+        }
+        .tab-content-section.active-content { display: block; }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 40px 0 20px;
+            border-top: 2px solid var(--border-color);
+            margin-top: auto;
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            display: inline-flex;
+        }
+
+        /* Form Styles */
+        .form-control {
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .form-control:focus {
+            box-shadow: 4px 4px 0px 0px var(--border-color);
+            border-color: var(--border-color);
+        }
+
+        /* Modal Customization */
+        .modal-content {
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 6px 6px 0px 0px var(--border-color);
+        }
+        .modal-header {
+            border-bottom: 2px solid var(--border-color);
+        }
+        .modal-footer {
+            border-top: 2px solid var(--border-color);
+        }
+
+        /* --- RESPONSIVE FIXES --- */
+        @media (max-width: 768px) {
+            .nav-section .nav-link {
+                margin: 0;
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+            .nav-container {
+                padding: 0 10px;
+            }
+            .tab-content-section {
+                padding-top: 130px !important; 
+            }
+            .profile-img-container {
+                width: 220px;
+                height: 220px;
+            }
+            .floating-text {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. HERO SECTION -->
+    <section id="home" class="hero-wrapper">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7 mb-5 mb-lg-0">
+                    <h1 class="display-4 fw-bold mb-2">Jacob Mwambwa Kau</h1>
+                    <h3 class="text-secondary mb-4" style="color: #6c757d !important; font-size: 1.4rem;">Full Stack Developer | UI/UX Designer | Software Engineer</h3>
+                    
+                    <p class="mb-4">
+                        Hello there! My name is Jacob Mwambwa Kau, and I'm a passionate full-stack developer and UI/UX designer with a love for creating seamless digital experiences. I specialize in building responsive web applications and intuitive user interfaces that not only look great but also provide an exceptional user experience. Currently, I am a freelance developer and indie maker, focused on building my own products. I've always been deeply immersed in tech, and I love building software that solves real problems.
+                    </p>
+                    <p class="mb-5">
+                        Throughout my career, I have designed and implemented features, planned roadmaps, and built seamless digital experiences for various clients and startups. I specialize in bridging the gap between beautiful design and robust, scalable backend architecture.
+                    </p>
+
+                    <div class="d-flex flex-wrap gap-3">
+                        <a class="brutal-btn brutal-btn-dark tab-link" data-target="contact">Hire Me <i class="fas fa-arrow-right"></i></a>
+                        <a href="docs/Jacob-Mwambwa-CV.pdf" class="brutal-btn">View CV <i class="fas fa-file-alt"></i></a>
+                        <a class="brutal-btn tab-link" data-target="projects">View Projects <i class="fas fa-briefcase"></i></a>
+                        <a href="https://www.linkedin.com/in/jacob-mwambwa-8b7296362" target="_blank" class="brutal-btn">LinkedIn <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-5 mt-5 mt-lg-0">
+                    <div style="position: relative; width: 100%; max-width: 400px; margin: 0 auto; padding: 20px 0;">
+                        <span class="floating-text" style="top: -10px; left: 0; animation-delay: 0s;">Always learning</span>
+                        <span class="floating-text" style="top: 20px; right: 0; animation-delay: 1s;">Driven by curiosity</span>
+                        <span class="floating-text" style="top: 45%; left: -40px; animation-delay: 2s;">Real solutions</span>
+                        <span class="floating-text" style="bottom: 40px; left: -20px; animation-delay: 0.5s;">Design meets function</span>
+                        <span class="floating-text" style="bottom: 0px; right: 0px; animation-delay: 1.5s;">Iterate & improve</span>
+                        <span class="floating-text" style="bottom: 20px; right: -40px; animation-delay: 2.5s;">Passionate UX</span>
+
+                        <div class="profile-img-container">
+                            <img src="https://res.cloudinary.com/ozrcvfms/image/upload/v1793799510/blogsystem/avatars/esdrktqda3nrui6k5hr0.jpg" alt="Jacob Mwambwa Kau" class="profile-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. NAVIGATION BAR -->
+    <nav class="nav-section" id="main-nav">
+        <div class="container nav-container">
+            <a class="nav-link tab-link" data-target="home"><i class="fas fa-home"></i> Home</a>
+            <a class="nav-link tab-link active" data-target="journey">Who I Am</a>
+            <a class="nav-link tab-link" data-target="tech-stack">Tech Stack</a>
+            <a class="nav-link tab-link" data-target="what-i-do">What I Do</a>
+            <a class="nav-link tab-link" data-target="projects">Projects</a>
+            <a class="nav-link tab-link" data-target="blogs">Blogs & Testimonials</a>
+            <a class="nav-link tab-link" data-target="contact">Contact Me</a>
+            <a class="nav-link tab-link" data-target="privacy">Privacy & Terms</a>
+        </div>
+    </nav>
+
+    <!-- 3. TAB CONTENT SECTIONS -->
+    <div id="tab-container">
+        
+        <!-- Who I Am (Journey) Tab -->
+        <section id="journey" class="tab-content-section active-content">
+            <div class="container">
+                <h2 class="mb-3">My Journey & Expertise</h2>
+                <p class="mb-5">I am a Full Stack Developer and UI/UX Designer dedicated to building scalable, user-centric digital solutions. I bridge the gap between beautiful design and robust backend architecture.</p>
+
+                <div class="row">
+                    <div class="col-lg-7">
+                        <h4 class="mb-4 pb-2 border-bottom">Experience</h4>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <h6>Software Developer</h6>
+                                <small class="text-primary">Zukbits Online - Kenya</small> <span class="float-end text-muted">Jan 2025 - Sept 2025</span>
+                                <ul class="mt-2 text-muted small">
+                                    <li>Automated software builds, testing, and deployment to drive efficient and reliable release cycles.</li>
+                                    <li>Collaborated with UI/UX personnel to integrate ease-of-use and accessibility considerations into developed software.</li>
+                                </ul>
+                            </div>
+                            <div class="timeline-item">
+                                <h6>Remote Business Development Representative Intern</h6>
+                                <small class="text-primary">Fihankra Comtech LLC - Ghana</small> <span class="float-end text-muted">March 2025 - April 2025</span>
+                                <ul class="mt-2 text-muted small">
+                                    <li>Identified client objectives to present product and service solutions.</li>
+                                    <li>Employed strategies to resolve client issues, retain clients, and achieve sales goals.</li>
+                                </ul>
+                            </div>
+                            <div class="timeline-item">
+                                <h6>Intern Software Developer</h6>
+                                <small class="text-primary">Zukbits Online - Kenya</small> <span class="float-end text-muted">Aug 2025 - Nov 2025</span>
+                                <ul class="mt-2 text-muted small">
+                                    <li>Developed security protocols to protect sensitive information from unauthorized access.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="mb-5">
+                            <h4 class="mb-4 pb-2 border-bottom">Availability</h4>
+                            <p><span class="text-success">●</span> <strong>Status:</strong> Open to new opportunities</p>
+                            <p><span class="text-primary">●</span> <strong>Work Setup:</strong> Remote, Hybrid, or On-site</p>
+                            <p><span class="text-secondary">●</span> <strong>Location:</strong> Kenya (Open to Global Remote)</p>
+                        </div>
+
+                        <div>
+                            <h4 class="mb-4 pb-2 border-bottom">How I Work</h4>
+                            <p class="small text-muted mb-4">I believe in clear communication, continuous learning, and delivering value early. I approach every project with a problem-solving mindset, ensuring that the user is always at the center of the design and development process.</p>
+                            
+                            <h6>Core Principles</h6>
+                            <ul class="small text-muted">
+                                <li><strong>Simplicity:</strong> Writing clean, maintainable code and designing intuitive interfaces.</li>
+                                <li><strong>Collaboration:</strong> Working closely with teams to bridge the gap between design and engineering.</li>
+                                <li><strong>Adaptability:</strong> Thriving in fast-paced environments and learning new technologies quickly.</li>
+                                <li><strong>Accountability:</strong> Taking ownership of tasks from conception to deployment.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-lg-7">
+                        <h4 class="mb-4 pb-2 border-bottom">Education</h4>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <h6>Bachelor of Science in Information Technology</h6>
+                                <small class="text-primary">Kibabii University - Bungoma</small> <span class="float-end text-muted">November 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack Tab -->
+        <section id="tech-stack" class="tab-content-section">
+            <div class="container">
+                <h2 class="mb-3">Tech Stack</h2>
+                <p class="mb-5">The technologies, frameworks, and tools I use daily to bring ideas to life and build robust applications.</p>
+
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="brutal-card p-4 h-100">
+                            <h5 class="mb-4">Frontend</h5><hr>
+                            <span class="brutal-tag">HTML5</span><span class="brutal-tag">CSS3</span><span class="brutal-tag">JavaScript</span><span class="brutal-tag">React</span><span class="brutal-tag">Tailwind CSS</span><span class="brutal-tag">Vite</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="brutal-card p-4 h-100">
+                            <h5 class="mb-4">Backend & Databases</h5><hr>
+                            <span class="brutal-tag">Node.js</span><span class="brutal-tag">Express</span><span class="brutal-tag">PHP</span><span class="brutal-tag">MongoDB</span><span class="brutal-tag">SQL</span><span class="brutal-tag">RESTful APIs</span><span class="brutal-tag">WebSockets</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="brutal-card p-4 h-100">
+                            <h5 class="mb-4">Design & UI/UX</h5><hr>
+                            <span class="brutal-tag">Prototyping</span><span class="brutal-tag">Responsive Design</span><span class="brutal-tag">Graphic Design</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="brutal-card p-4 h-100">
+                            <h5 class="mb-4">Tools & DevOps</h5><hr>
+                            <span class="brutal-tag">Git & GitHub</span><span class="brutal-tag">VS Code</span><span class="brutal-tag">Netlify</span><span class="brutal-tag">Vercel</span><span class="brutal-tag">Render</span><span class="brutal-tag">Windows / Mac</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="brutal-card p-4 h-100">
+                            <h5 class="mb-4">IT Consultancy</h5><hr>
+                            <span class="brutal-tag">IT Strategy & Planning</span><span class="brutal-tag">Systems Analysis</span><span class="brutal-tag">Technology Advisory</span><span class="brutal-tag">Digital Transformation</span><span class="brutal-tag">Process Optimization</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What I Do Tab -->
+        <section id="what-i-do" class="tab-content-section">
+            <div class="container">
+                <h2 class="mb-3">What I Do</h2>
+                <p class="mb-5">I provide end-to-end digital solutions. From the first sketch of an idea to the final line of deployed code, here is how I can help your business or project succeed.</p>
+
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="brutal-card p-4">
+                            <div class="fs-3 mb-3"><i class="fas fa-code"></i></div>
+                            <h5>Full Stack Web Development</h5>
+                            <p class="small text-muted mb-0">Building scalable, secure, and high-performance web applications from scratch. I handle everything from database architecture (MongoDB/SQL) to server logic and API integration.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="brutal-card p-4">
+                            <div class="fs-3 mb-3"><i class="fas fa-pen-nib"></i></div>
+                            <h5>UI/UX Design</h5>
+                            <p class="small text-muted mb-0">Crafting intuitive and visually appealing user interfaces. I start with classic pen and paper wireframes to map out seamless user flows, ensuring the core idea is solid before writing any code.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="brutal-card p-4">
+                            <div class="fs-3 mb-3"><i class="fas fa-desktop"></i></div>
+                            <h5>Frontend Development</h5>
+                            <p class="small text-muted mb-0">Turning designs into pixel-perfect, responsive websites using React and Tailwind CSS. I ensure smooth animations, fast load times, and mobile-first responsiveness.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="brutal-card p-4">
+                            <div class="fs-3 mb-3"><i class="fas fa-bolt"></i></div>
+                            <h5>Website Optimization & Audits</h5>
+                            <p class="small text-muted mb-0">Reviewing existing websites to improve performance, accessibility, and SEO. I help identify bottlenecks and implement modern solutions to make your site faster and better.</p>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="brutal-card p-4">
+                            <div class="fs-3 mb-3"><i class="fas fa-palette"></i></div>
+                            <h5>Graphic Design & Branding</h5>
+                            <p class="small text-muted mb-0">Creating eye-catching visual assets using Canva. From social media graphics and marketing materials to brand kits and presentation decks, I ensure your brand stands out visually.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Tab -->
+        <section id="projects" class="tab-content-section">
+            <div class="container">
+                <h2 class="mb-3">Featured Projects</h2>
+                <p class="mb-5">A selection of my recent work, ranging from full-stack web applications to intuitive user interfaces.</p>
+
+                <div class="row g-4">
+                    <!-- Project 1 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="brutal-card h-100 d-flex flex-column">
+                            <div class="border-bottom" style="height: 150px; overflow: hidden;">
+                                <img src="images/Voting.png" alt="Witty Voting System" class="w-100 h-100" style="object-fit: cover;">
+                            </div>
+                            <div class="p-3 flex-grow-1">
+                                <h6 class="fw-bold">Witty Voting System</h6>
+                                <p class="small text-muted">A secure and scalable digital voting platform featuring real-time results, user authentication, and an intuitive admin dashboard.</p>
+                            </div>
+                            <div class="p-3 border-top d-flex gap-2">
+                                <a href="https://witty-voting-system.onrender.com/" target="_blank" class="brutal-btn flex-fill py-1" style="font-size: 0.8rem;">Live Demo <i class="fas fa-external-link-alt"></i></a>
+                                <a href="https://github.com/jacobkau/Voting-System" target="_blank" class="brutal-btn flex-fill py-1" style="font-size: 0.8rem;">Github <i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="brutal-card h-100 d-flex flex-column">
+                            <div class="border-bottom" style="height: 150px; overflow: hidden;">
+                                <img src="images/Handup.png" alt="Witty Handup System" class="w-100 h-100" style="object-fit: cover;">
+                            </div>
+                            <div class="p-3 flex-grow-1">
+                                <h6 class="fw-bold">Witty Handup System</h6>
+                                <p class="small text-muted">A platform designed to connect volunteers with community projects. Features task tracking, user profiles, and seamless communication.</p>
+                            </div>
+                            <div class="p-3 border-top d-flex gap-2">
+                                <a href="https://wittyhandupsystem.vercel.app/" target="_blank" class="brutal-btn flex-fill py-1" style="font-size: 0.8rem;">Live Demo <i class="fas fa-external-link-alt"></i></a>
+                                <a href="https://github.com/jacobkau/Witty-HandUp-System" target="_blank" class="brutal-btn flex-fill py-1" style="font-size: 0.8rem;">Github <i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="brutal-card h-100 d-flex flex-column">
+                            <div class="border-bottom" style="height: 150px; overflow: hidden;">
+                                <img src="images/WHT.png" alt="Witty Highbrow Technologies" class="w-100 h-100" style="object-fit: cover;">
+                            </div>
+                            <div class="p-3 flex-grow-1">
+                                <h6 class="fw-bold">Witty Highbrow Technologies</h6>
+                                <p class="small text-muted">The official corporate website for a tech agency. Built with a focus on performance, SEO, and a modern, responsive UI.</p>
+                            </div>
+                            <div class="p-3 border-top d-flex gap-2">
+                                <a href="https://witty-highbrow-technologies.onrender.com/#" target="_blank" class="brutal-btn flex-fill py-1" style="font-size: 0.8rem;">Live Demo <i class="fas fa-external-link-alt"></i></a>
+                                <a href="https://github.com/jacobkau/Witty-Highbrow-Technologies" target="_blank" class="brutal-btn flex-fill py-1" style="font-size: 0.8rem;">Github <i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="brutal-card h-100 d-flex flex-column">
+                            <div class="border-bottom" style="height: 150px; overflow: hidden;">
+                                <img src="images/wittymart-logo.png" alt="WittyMart E-Commerce" class="w-100 h-100" style="object-fit: cover;">
+                            </div>
+                            <div class="p-3 flex-grow-1">
+                                <h6 class="fw-bold">WittyMart E-Commerce</h6>
+                                <p class="small text-muted">A full-stack e-commerce solution featuring product catalogs, a shopping cart, secure checkout, and an order management system.</p>
+                            </div>
+                            <div class="p-3 border-top d-flex gap-2">
+                                <a href="https://wittymart.onrender.com/" target="_blank" class="brutal-btn flex-fill py-1" style="font-size: 0.8rem;">Live Demo <i class="fas fa-external-link-alt"></i></a>
+                                <a href="https://github.com/jacobkau/WittyMart-Fronted-and-Backend" target="_blank" class="brutal-btn flex-fill py-1" style="font-size: 0.8rem;">Github <i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="brutal-card h-100 d-flex flex-column">
+                            <div class="border-bottom" style="height: 150px; overflow: hidden;">
+                                <img src="images/moodtracker.png" alt="Witty MoodTracker" class="w-100 h-100" style="object-fit: cover;">
+                            </div>
+                            <div class="p-3 flex-grow-1">
+                                <h6 class="fw-bold">Witty MoodTracker</h6>
+                                <p class="small text-muted">A mental health companion app that helps users log their daily mood, visualize emotional trends, and maintain a personal journal.</p>
+                            </div>
+                            <div class="p-3 border-top d-flex gap-2">
+                                <a href="https://mood-tracker-bice.vercel.app/" target="_blank" class="brutal-btn flex-fill py-1" style="font-size: 0.8rem;">Live Demo <i class="fas fa-external-link-alt"></i></a>
+                                <a href="https://github.com/jacobkau/mood-tracker" target="_blank" class="brutal-btn flex-fill py-1" style="font-size: 0.8rem;">Github <i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 6 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="brutal-card h-100 d-flex flex-column">
+                            <div class="border-bottom" style="height: 150px; overflow: hidden;">
+                                <img src="images/Blog.png" alt="Witty Blog System" class="w-100 h-100" style="object-fit: cover;">
+                            </div>
+                            <div class="p-3 flex-grow-1">
+                                <h6 class="fw-bold">Witty Blog System</h6>
+                                <p class="small text-muted">A dynamic content management system for writers. Features markdown support, comment sections, and a clean, distraction-free reading experience.</p>
+                            </div>
+                            <div class="p-3 border-top d-flex gap-2">
+                                <a href="https://blog-system-ochre.vercel.app/" target="_blank" class="brutal-btn flex-fill py-1" style="font-size: 0.8rem;">Live Demo <i class="fas fa-external-link-alt"></i></a>
+                                <a href="https://github.com/jacobkau/Blog-system" target="_blank" class="brutal-btn flex-fill py-1" style="font-size: 0.8rem;">Github <i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 7 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="brutal-card h-100 d-flex flex-column">
+                            <div class="border-bottom" style="height: 150px; overflow: hidden;">
+                                <img src="images/chat.png" alt="Witty Chat App" class="w-100 h-100" style="object-fit: cover;">
+                            </div>
+                            <div class="p-3 flex-grow-1">
+                                <h6 class="fw-bold">Witty Chat App</h6>
+                                <p class="small text-muted">A real-time messaging application with instant notifications, media sharing, and group chat functionality built using WebSockets.</p>
+                            </div>
+                            <div class="p-3 border-top d-flex gap-2">
+                                <a href="https://witty-chat-app.vercel.app/" target="_blank" class="brutal-btn flex-fill py-1" style="font-size: 0.8rem;">Live Demo <i class="fas fa-external-link-alt"></i></a>
+                                <a href="https://github.com/jacobkau/Witty-Chat-App" target="_blank" class="brutal-btn flex-fill py-1" style="font-size: 0.8rem;">Github <i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blogs & Testimonials Tab -->
+        <section id="blogs" class="tab-content-section">
+            <div class="container">
+                <h2 class="mb-3">Testimonials</h2>
+                <p class="mb-5">What clients and colleagues have to say about working with me.</p>
+
+                <div class="row g-4 mb-5">
+                    <div class="col-md-6">
+                        <div class="brutal-card p-4 h-100">
+                            <p class="small fst-italic">"Jacob is a highly motivated developer. He takes the time to understand the UX requirements and translates them perfectly into clean, scalable code."</p>
+                            <div class="d-flex align-items-center mt-3">
+                                <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px; font-weight: bold;">D</div>
+                                <div><strong class="d-block small">Developer</strong><small class="text-muted">WordPress dev</small></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="brutal-card p-4 h-100">
+                            <p class="small fst-italic">"Working with Jacob on our e-learning initiative was a great experience. He is patient, knowledgeable, and excellent at explaining technical concepts."</p>
+                            <div class="d-flex align-items-center mt-3">
+                                <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px; font-weight: bold;">S</div>
+                                <div><strong class="d-block small">School Administrator</strong><small class="text-muted">MOE, Kenya</small></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="brutal-card p-4 h-100">
+                            <p class="small fst-italic">"Jacob's ability to handle both the UI design and the backend logic saved us a lot of time. He delivered our classified platform (Paycent Microfinance) right on schedule."</p>
+                            <div class="d-flex align-items-center mt-3">
+                                <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px; font-weight: bold;">S</div>
+                                <div><strong class="d-block small">Director</strong><small class="text-muted">Zukbits Online</small></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="brutal-card p-4 h-100">
+                            <p class="small fst-italic">"We needed a digital portal that was respectful, easy to navigate, and accessible for our congregation. Jacob delivered a beautiful, secure platform that perfectly serves our community."</p>
+                            <div class="d-flex align-items-center mt-3">
+                                <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px; font-weight: bold;">P</div>
+                                <div><strong class="d-block small">Project Lead</strong><small class="text-muted">Catholic Archdiocese</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="mb-3">Articles & Insights</h2>
+                <p class="mb-5">Deep dives into the projects I've built and my thoughts on the tech industry.</p>
+
+                <!-- ARTICLES SECTION WITH MODAL BUTTONS -->
+                <div class="row g-4">
+                    
+                    <!-- Article 1 -->
+                    <div class="col-md-4">
+                        <div class="brutal-card p-4 h-100 d-flex flex-column">
+                            <span class="badge bg-light text-dark border mb-2">TECH FIELD</span>
+                            <h6 class="fw-bold">Why I Combine UI/UX with Full-Stack Development</h6>
+                            <p class="small text-muted mt-2">Understanding both design and code allows me to build products that are not only functional but incredibly user-friendly.</p>
+                            <button class="btn btn-link text-dark fw-bold p-0 mt-auto text-start" data-bs-toggle="modal" data-bs-target="#article1" style="text-decoration: none;">
+                                Read Article <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Article 2 -->
+                    <div class="col-md-4">
+                        <div class="brutal-card p-4 h-100 d-flex flex-column">
+                            <span class="badge bg-light text-dark border mb-2">WITTY VOTING SYSTEM</span>
+                            <h6 class="fw-bold">Building Secure Voting Systems: My Approach</h6>
+                            <p class="small text-muted mt-2">A deep dive into the architecture and security protocols I used when building the Witty Voting System.</p>
+                            <button class="btn btn-link text-dark fw-bold p-0 mt-auto text-start" data-bs-toggle="modal" data-bs-target="#article2" style="text-decoration: none;">
+                                Read Article <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Article 3 -->
+                    <div class="col-md-4">
+                        <div class="brutal-card p-4 h-100 d-flex flex-column">
+                            <span class="badge bg-light text-dark border mb-2">WITTY HANDUP SYSTEM</span>
+                            <h6 class="fw-bold">Connecting Communities: The Witty HandUp System</h6>
+                            <p class="small text-muted mt-2">How I built a platform to connect volunteers with community projects using modern web technologies.</p>
+                            <button class="btn btn-link text-dark fw-bold p-0 mt-auto text-start" data-bs-toggle="modal" data-bs-target="#article3" style="text-decoration: none;">
+                                Read Article <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Article 4 -->
+                    <div class="col-md-4">
+                        <div class="brutal-card p-4 h-100 d-flex flex-column">
+                            <span class="badge bg-light text-dark border mb-2">WITTYMART E-COMMERCE</span>
+                            <h6 class="fw-bold">Scaling E-Commerce with WittyMart</h6>
+                            <p class="small text-muted mt-2">The architecture behind a full-stack e-commerce solution, from product catalogs to secure checkout.</p>
+                            <button class="btn btn-link text-dark fw-bold p-0 mt-auto text-start" data-bs-toggle="modal" data-bs-target="#article4" style="text-decoration: none;">
+                                Read Article <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Article 5 -->
+                    <div class="col-md-4">
+                        <div class="brutal-card p-4 h-100 d-flex flex-column">
+                            <span class="badge bg-light text-dark border mb-2">WITTY MOODTRACKER</span>
+                            <h6 class="fw-bold">Designing for Mental Health: Witty MoodTracker</h6>
+                            <p class="small text-muted mt-2">Creating a safe, intuitive digital space for users to log their daily moods and visualize emotional trends.</p>
+                            <button class="btn btn-link text-dark fw-bold p-0 mt-auto text-start" data-bs-toggle="modal" data-bs-target="#article5" style="text-decoration: none;">
+                                Read Article <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Article 6 -->
+                    <div class="col-md-4">
+                        <div class="brutal-card p-4 h-100 d-flex flex-column">
+                            <span class="badge bg-light text-dark border mb-2">WITTY BLOG SYSTEM</span>
+                            <h6 class="fw-bold">Headless CMS & The Witty Blog System</h6>
+                            <p class="small text-muted mt-2">Why I chose a dynamic content management system with Markdown support for a distraction-free writing experience.</p>
+                            <button class="btn btn-link text-dark fw-bold p-0 mt-auto text-start" data-bs-toggle="modal" data-bs-target="#article6" style="text-decoration: none;">
+                                Read Article <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Article 7 -->
+                    <div class="col-md-4">
+                        <div class="brutal-card p-4 h-100 d-flex flex-column">
+                            <span class="badge bg-light text-dark border mb-2">WITTY CHAT APP</span>
+                            <h6 class="fw-bold">Real-Time Communication: Inside Witty Chat</h6>
+                            <p class="small text-muted mt-2">How WebSockets power instant messaging, notifications, and group chat in the Witty Chat App.</p>
+                            <button class="btn btn-link text-dark fw-bold p-0 mt-auto text-start" data-bs-toggle="modal" data-bs-target="#article7" style="text-decoration: none;">
+                                Read Article <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Tab -->
+        <section id="contact" class="tab-content-section">
+            <div class="container">
+                <h2 class="mb-3">Get in Touch</h2>
+                <p class="mb-5">Have a project in mind or just want to say hi? Drop a message below.</p>
+
+                <div class="row">
+                    <div class="col-lg-5 mb-5 mb-lg-0">
+                        <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
+                        
+                        <div class="brutal-card p-4 mt-4 mb-4">
+                            <h5 class="mb-3">Contact Information</h5>
+                            <p class="mb-2"><i class="fas fa-envelope me-2"></i> kaujacob4@gmail.com</p>
+                            <p class="mb-0"><i class="fas fa-map-marker-alt me-2"></i> Nairobi, Kenya (Open to Remote)</p>
+                        </div>
+
+                        <div class="d-flex gap-2 flex-wrap">
+                            <a href="https://www.linkedin.com/in/jacob-mwambwa-8b7296362" target="_blank" class="brutal-btn py-1 px-3 text-decoration-none">LinkedIn</a>
+                            <a href="https://github.com/jacobkau" target="_blank" class="brutal-btn py-1 px-3 text-decoration-none">Github</a>
+                            <a href="https://linktr.ee/jacob_mwambwa" target="_blank" class="brutal-btn py-1 px-3 text-decoration-none">Linktree</a>
+                            <a href="https://x.com/jacob_witty4" target="_blank" class="brutal-btn py-1 px-3 text-decoration-none">X (Twitter)</a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <div class="brutal-card p-4 p-md-5">
+                            <h5 class="mb-4">Send a Message</h5>
+                            <!-- Formspree integration -->
+                            <form action="https://formspree.io/f/xdeepdow" method="POST">
+                                <div class="mb-3">
+                                    <label class="form-label small fw-bold">Name</label>
+                                    <input type="text" name="name" class="form-control" placeholder="Enter your full name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small fw-bold">Email</label>
+                                    <input type="email" name="email" class="form-control" placeholder="Enter your email address" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label small fw-bold">Message</label>
+                                    <textarea name="message" class="form-control" rows="4" placeholder="Tell me about your project or idea..." required></textarea>
+                                </div>
+                                <button type="submit" class="brutal-btn brutal-btn-dark w-100 py-3">Send Message <i class="fas fa-paper-plane ms-2"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Privacy Tab -->
+        <section id="privacy" class="tab-content-section">
+            <div class="container">
+                <h2 class="mb-3">Privacy Policy & Terms</h2>
+                <p class="mb-5 text-muted">Please read this document carefully to understand how your data is handled.</p>
+
+                <div class="brutal-card p-4 p-md-5">
+                    <div class="mb-4">
+                        <h6>1. Privacy Policy</h6><hr>
+                        <p class="small text-muted">Your privacy is of utmost importance. This portfolio website is designed to be a safe space for you to explore my work. I do not actively track you, and I do not sell your data to third parties.</p>
+                        <p class="small text-muted">Any personal information you choose to share with me (such as your name and email address) through the contact form is used solely to respond to your inquiries, discuss potential projects, or answer your questions.</p>
+                    </div>
+                    <div class="mb-4">
+                        <h6>2. Browser Actions & Data Storage</h6><hr>
+                        <p class="small text-muted">This website does not use invasive tracking cookies or advertising pixels. However, standard browser actions may occur:</p>
+                        <ul class="small text-muted">
+                            <li><strong>Local Storage:</strong> Your browser may cache elements like images to make the site load faster on your next visit.</li>
+                            <li><strong>Form Submissions:</strong> When you submit the contact form, your data is securely transmitted through a third-party service directly to my email inbox. It is not stored on this website's database.</li>
+                        </ul>
+                    </div>
+                    <div class="mb-4">
+                        <h6>3. Hosting & Third-Party Services</h6><hr>
+                        <p class="small text-muted">This website and its associated projects are hosted on modern cloud platforms (such as Vercel, Render, or Netlify). These providers may collect standard server logs (IP addresses, browser types, timestamps) for security and operational purposes.</p>
+                    </div>
+                    <div class="mb-4">
+                        <h6>4. User Rights</h6><hr>
+                        <p class="small text-muted">You have full control over your data. At any time, you have the right to:</p>
+                        <ul class="small text-muted">
+                            <li><strong>Access:</strong> Request a copy of the information you have sent me.</li>
+                            <li><strong>Deletion:</strong> Request that I delete any emails or contact form submissions you have sent to me.</li>
+                            <li><strong>Correction:</strong> Request to update any inaccurate information.</li>
+                        </ul>
+                        <p class="small text-muted">To exercise any of these rights, please reach out via the contact tab or directly at kaujacob4@gmail.com.</p>
+                    </div>
+                    <div class="mb-4">
+                        <h6>5. Terms of Service & Copyright</h6><hr>
+                        <p class="small text-muted">By accessing this website, you agree to use it for lawful purposes only.</p>
+                        <p class="small text-muted"><strong>Copyright Notice:</strong> All content on this website, including but not limited to the user interface design, written text, graphics, and source code snippets, is the intellectual property of <strong>Jacob Mwambwa Kau</strong> unless otherwise stated.</p>
+                    </div>
+                    <p class="small text-muted mb-0 fst-italic">Last updated: November 2026</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="main-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 mb-4 mb-md-0">
+                    <h5 class="fw-bold">Jacob Mwambwa Kau</h5>
+                    <p class="small text-light opacity-75 mt-3">Full Stack Developer & UI/UX Designer. I build scalable, user-centric digital solutions that bridge the gap between beautiful design and robust architecture.</p>
+                    <div class="d-flex gap-3 mt-3">
+                        <a href="https://github.com/jacobkau" target="_blank" class="text-white fs-5"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/jacob-mwambwa-8b7296362" target="_blank" class="text-white fs-5"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h6 class="fw-bold mb-3">NAVIGATION</h6>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a class="text-white opacity-75 text-decoration-none tab-link" data-target="home">Home</a></li>
+                        <li class="mb-2"><a class="text-white opacity-75 text-decoration-none tab-link" data-target="journey">Who I Am</a></li>
+                        <li class="mb-2"><a class="text-white opacity-75 text-decoration-none tab-link" data-target="tech-stack">Tech Stack</a></li>
+                        <li class="mb-2"><a class="text-white opacity-75 text-decoration-none tab-link" data-target="what-i-do">What I Do</a></li>
+                        <li class="mb-2"><a class="text-white opacity-75 text-decoration-none tab-link" data-target="projects">Projects</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="fw-bold mb-3">GET IN TOUCH</h6>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> <a href="mailto:kaujacob4@gmail.com" class="text-white opacity-75 text-decoration-none">Email</a></li>
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Nairobi, Kenya</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="mt-4 mb-3 border-secondary">
+            
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center small opacity-75">
+                <p class="mb-2 mb-md-0">&copy; 2026 Jacob Mwambwa Kau. All rights reserved.</p>
+                <div>
+                    <a class="text-white text-decoration-none me-3 tab-link" data-target="privacy">Privacy & Terms</a>
+                    <a class="text-white text-decoration-none tab-link" data-target="contact">Contact Me</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top (Acts as Home) -->
+    <button class="brutal-btn brutal-btn-dark rounded-pill back-to-top border-0 tab-link" data-target="home">
+        Top <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- ============================================== -->
+    <!-- MODALS FOR ARTICLES -->
+    <!-- ============================================== -->
+
+    <!-- Modal 1 -->
+    <div class="modal fade" id="article1" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-light">
+                    <div>
+                        <span class="badge bg-dark text-white mb-2">TECH FIELD</span>
+                        <h4 class="modal-title fw-bold">Why I Combine UI/UX with Full-Stack Development</h4>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="small text-muted fst-italic mb-3">"Understanding both design and code allows me to build products that are not only functional but incredibly user-friendly."</p>
+                    <p>I believe that a great developer isn't just someone who writes code, but someone who understands the 'why' behind the code. By studying UI/UX design, I've learned to look at software through the eyes of the user. This dual perspective allows me to bridge the gap between beautiful aesthetics and robust backend architecture.</p>
+                    <p>When I build a feature, I think about how it feels to click that button, and I also think about how efficiently the database query resolves. Merging these two fields has made me a more empathetic and effective engineer.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="brutal-btn py-2" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div class="modal fade" id="article2" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-light">
+                    <div>
+                        <span class="badge bg-dark text-white mb-2">WITTY VOTING SYSTEM</span>
+                        <h4 class="modal-title fw-bold">Building Secure Voting Systems: My Approach</h4>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="small text-muted fst-italic mb-3">"A deep dive into the architecture and security protocols I used when building the Witty Voting System."</p>
+                    <p>Security is the backbone of any voting system. For the Witty Voting System, I implemented a multi-layered authentication process to ensure that each user could only vote once. Beyond user authentication, I focused heavily on database integrity.</p>
+                    <p>Every vote is encrypted and logged with a timestamp, creating an immutable audit trail. The frontend uses HTML5, JS & CSS to provide real-time visual feedback, while the backend handles the heavy lifting of verification and secure data storage.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="brutal-btn py-2" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3 -->
+    <div class="modal fade" id="article3" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-light">
+                    <div>
+                        <span class="badge bg-dark text-white mb-2">WITTY HANDUP SYSTEM</span>
+                        <h4 class="modal-title fw-bold">Connecting Communities: The Witty HandUp System</h4>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="small text-muted fst-italic mb-3">"How I built a platform to connect volunteers with community projects using modern web technologies."</p>
+                    <p>The Witty HandUp System was born out of a desire to make volunteering easier. The challenge was creating an intuitive interface where organizers could post tasks, and volunteers could easily find them.</p>
+                    <p>I built a robust task-tracking dashboard and implemented a seamless communication channel within the app. This project taught me a lot about handling complex state management on the frontend and designing relational databases that can handle many-to-many relationships efficiently.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="brutal-btn py-2" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4 -->
+    <div class="modal fade" id="article4" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-light">
+                    <div>
+                        <span class="badge bg-dark text-white mb-2">WITTYMART E-COMMERCE</span>
+                        <h4 class="modal-title fw-bold">Scaling E-Commerce with WittyMart</h4>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="small text-muted fst-italic mb-3">"The architecture behind a full-stack e-commerce solution, from product catalogs to secure checkout."</p>
+                    <p>Building WittyMart required a deep understanding of transactional data. From managing product inventories to handling shopping carts and secure checkouts, every interaction needs to be flawless.</p>
+                    <p>I utilized a robust backend to manage orders and user sessions, ensuring that if a user leaves the site, their cart remains intact. The UI was designed to reduce friction, guiding the user smoothly from browsing to checkout without distraction.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="brutal-btn py-2" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 5 -->
+    <div class="modal fade" id="article5" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-light">
+                    <div>
+                        <span class="badge bg-dark text-white mb-2">WITTY MOODTRACKER</span>
+                        <h4 class="modal-title fw-bold">Designing for Mental Health: Witty MoodTracker</h4>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="small text-muted fst-italic mb-3">"Creating a safe, intuitive digital space for users to log their daily moods and visualize emotional trends."</p>
+                    <p>The Witty MoodTracker was a deeply personal project. Designing an app for mental health requires immense empathy. The interface needs to be calming, non-judgmental, and easy to use, even when a user might be feeling overwhelmed.</p>
+                    <p>I focused on smooth animations, soft color palettes, and a journaling feature that feels like talking to a friend. Data visualization was key here, turning complex emotional data into simple, easy-to-read charts.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="brutal-btn py-2" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 6 -->
+    <div class="modal fade" id="article6" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-light">
+                    <div>
+                        <span class="badge bg-dark text-white mb-2">WITTY BLOG SYSTEM</span>
+                        <h4 class="modal-title fw-bold">Headless CMS & The Witty Blog System</h4>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="small text-muted fst-italic mb-3">"Why I chose a dynamic content management system with Markdown support for a distraction-free writing experience."</p>
+                    <p>For the Witty Blog System, the goal was to get out of the writer's way. I built a custom Content Management System that supports Markdown, allowing writers to format their text without touching any complex HTML.</p>
+                    <p>The frontend was optimized for reading, with careful attention paid to typography, line height, and color contrast. The system dynamically fetches and renders the content, making publishing new articles incredibly fast and efficient.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="brutal-btn py-2" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 7 -->
+    <div class="modal fade" id="article7" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-light">
+                    <div>
+                        <span class="badge bg-dark text-white mb-2">WITTY CHAT APP</span>
+                        <h4 class="modal-title fw-bold">Real-Time Communication: Inside Witty Chat</h4>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="small text-muted fst-italic mb-3">"How WebSockets power instant messaging, notifications, and group chat in the Witty Chat App."</p>
+                    <p>Real-time functionality changes the way users interact with an application. For the Witty Chat App, I relied heavily on WebSockets to keep the connection open between the client and the server.</p>
+                    <p>This allowed for instant message delivery, typing indicators, and real-time notifications without the need to refresh the page. Handling media sharing and ensuring messages are securely routed to the correct group or individual was the most challenging and rewarding part of this build.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="brutal-btn py-2" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const navSection = document.getElementById('main-nav');
+            const heroSection = document.getElementById('home');
+            const tabContainer = document.getElementById('tab-container');
+            const sections = document.querySelectorAll('.tab-content-section');
+            const tabLinks = document.querySelectorAll('.tab-link');
+
+            function switchTab(targetId) {
+                // 1. Remove active state from all links and sections
+                document.querySelectorAll('.nav-section .nav-link').forEach(link => link.classList.remove('active'));
+                sections.forEach(sec => sec.classList.remove('active-content'));
+
+                // 2. Highlight the clicked tab in the navigation
+                document.querySelectorAll(`.nav-section .nav-link[data-target="${targetId}"]`).forEach(link => link.classList.add('active'));
+
+                // 3. Logic for HOME (Show Hero, put Nav below Hero)
+                if (targetId === 'home') {
+                    heroSection.style.display = 'block';
+                    tabContainer.style.display = 'block';
+                    navSection.classList.remove('is-fixed');
+                    
+                    // Load Journey content under the nav
+                    document.getElementById('journey').classList.add('active-content');
+                    
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+
+                // 4. Logic for ALL OTHER TABS (Hide Hero, fix Nav to top)
+                heroSection.style.display = 'none';
+                tabContainer.style.display = 'block';
+                
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.classList.add('active-content');
+                }
+
+                // Make Nav fixed
+                navSection.classList.add('is-fixed');
+                
+                // Push the tab content down so the fixed nav doesn't cover the heading
+                tabContainer.style.paddingTop = "90px";
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'instant' });
+            }
+
+            // Attach click listeners to ALL links (Nav, Footer, Hero Buttons)
+            tabLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = this.dataset.target;
+                    if (target) {
+                        switchTab(target);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
